@@ -14,7 +14,7 @@ import collection.JavaConverters._
  */
 object MyEsUtil {
 
-  private val ES_HOST = "http://hadoop102"
+  private val ES_HOST = "http://192.168.1.102"
   private val ES_HTTP_PORT = 9200
   private var factory: JestClientFactory = null
 
@@ -58,9 +58,7 @@ object MyEsUtil {
                             V: document
    */
   def insertBulk(indexName: String, docList: List[(String, Any)]): Unit = {
-
     if (docList.size > 0) {
-
       val jest: JestClient = getClient
 
       val bulkBuilder = new Bulk.Builder().defaultIndex(indexName).defaultType("_doc")
@@ -75,7 +73,6 @@ object MyEsUtil {
       }
 
       val bulk: Bulk = bulkBuilder.build()
-
       var items: util.List[BulkResult#BulkResultItem] = null
 
       try {
@@ -85,25 +82,22 @@ object MyEsUtil {
       } finally {
         //自动关闭连接
         close(jest)
-        if (items!= null){
+        if (items != null){
           println("保存" + items.size() + "条数据")
-        }
-        /*
+          /*
             items: 是一个java的集合
              <- 只能用来遍历scala的集合
-
              将items，由Java的集合转换为scala的集合    java集合.asScala
-
              由scala集合转java集合 scala集合.asJava
          */
-        for (item <- items.asScala) {
-          if (item.error != null && item.error.nonEmpty) {
-            println(item.error)
-            println(item.errorReason)
+          for (item <- items.asScala) {
+            if (item.error != null && item.error.nonEmpty) {
+              println(item.error)
+              println(item.errorReason)
+            }
           }
         }
       }
     }
   }
-
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,14 @@ import java.util.List;
 public class GmallPublisherController {
     @Autowired
     private PublisherService publisherService;
+
+    /*
+        http://localhost:8070/sale_detail?date=2020-08-21&startpage=1&size=5&keyword=小米手机
+     */
+    @RequestMapping(value = "/sale_detail")
+    public JSONObject handle3(String date,Integer startpage,Integer size,String keyword) throws IOException {
+        return publisherService.getESData(date,startpage,size,keyword);
+    }
 
     //http://localhost:8070/realtime-total?date=2021-07-06
     @RequestMapping(value = "/realtime-total")

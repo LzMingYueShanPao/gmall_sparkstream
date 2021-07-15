@@ -101,7 +101,8 @@ public class MyClient {
         // 采集 order_detail 的insert
         }else if ("order_detail".equals(tableName) && rowChange.getEventType().equals(CanalEntry.EventType.INSERT)) {
             writeDataToKafka(Constants.GMALL_ORDER_DETAIL,rowChange);
-        }else {
+        }else if((rowChange.getEventType().equals(CanalEntry.EventType.INSERT)
+                ||rowChange.getEventType().equals(CanalEntry.EventType.INSERT))&&"user_info".equals(tableName)){
             writeDataToKafka(Constants.GMALL_USER_INFO,rowChange);
         }
     }

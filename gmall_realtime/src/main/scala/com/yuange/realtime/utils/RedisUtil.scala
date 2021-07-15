@@ -21,4 +21,9 @@ object RedisUtil {
   def getJedisClient():Jedis={
     new Jedis(host,port.toInt)
   }
+
+  def main(args: Array[String]): Unit = {
+    val jedis = getJedisClient()
+    jedis.set("1","1");
+  }
 }

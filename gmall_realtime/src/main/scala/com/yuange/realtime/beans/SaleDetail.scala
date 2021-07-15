@@ -1,5 +1,7 @@
 package com.yuange.realtime.beans
 
+import java.text.SimpleDateFormat
+
 /**
  * @作者：袁哥
  * @时间：2021/7/11 21:36
@@ -47,7 +49,7 @@ case class SaleDetail(
       this.user_id=userInfo.id
 
       val formattor = new SimpleDateFormat("yyyy-MM-dd")
-      val date: java.util.Date = formattor.parse(userInfo.birthday)
+      val date= formattor.parse(userInfo.birthday)
       val curTs: Long = System.currentTimeMillis()
       val  betweenMs= curTs-date.getTime
       val age=betweenMs/1000L/60L/60L/24L/365L

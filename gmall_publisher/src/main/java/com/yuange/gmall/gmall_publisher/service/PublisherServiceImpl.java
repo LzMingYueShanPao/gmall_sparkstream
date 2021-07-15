@@ -1,11 +1,14 @@
 package com.yuange.gmall.gmall_publisher.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yuange.gmall.gmall_publisher.beans.DAUData;
 import com.yuange.gmall.gmall_publisher.beans.GMVData;
+import com.yuange.gmall.gmall_publisher.dao.ESDao;
 import com.yuange.gmall.gmall_publisher.mapper.PublisherMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -46,5 +49,13 @@ public class PublisherServiceImpl implements  PublisherService{
     @Override
     public List<GMVData> getGMVDatasByDate(String date) {
         return publisherMapper.getGMVDatasByDate(date);
+    }
+
+    @Autowired
+    private ESDao esDao;
+
+    @Override
+    public JSONObject getESData(String date, Integer startpage, Integer size, String keyword) throws IOException {
+        return esDao.getESData(date,startpage,size,keyword);
     }
 }

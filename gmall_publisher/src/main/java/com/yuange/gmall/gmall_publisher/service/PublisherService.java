@@ -1,8 +1,10 @@
 package com.yuange.gmall.gmall_publisher.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yuange.gmall.gmall_publisher.beans.DAUData;
 import com.yuange.gmall.gmall_publisher.beans.GMVData;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -25,5 +27,7 @@ public interface PublisherService {
 
     //查询分时交易额
     List<GMVData> getGMVDatasByDate(String date);
+
+    JSONObject getESData(String date, Integer startpage, Integer size, String keyword) throws IOException;
 
 }
